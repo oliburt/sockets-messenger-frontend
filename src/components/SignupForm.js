@@ -1,28 +1,38 @@
-
-import React from 'react'
-import { Form } from 'semantic-ui-react'
-import BackendAdapter from '../adapters/BackendAdapter'
-
+import React from "react";
+import { Form } from "semantic-ui-react";
+import BackendAdapter from "../adapters/BackendAdapter";
 
 class SignupForm extends React.Component {
   state = {
-    username: '',
-    password: '',
-    password_confirmation: ''
-  }
+    username: "",
+    password: "",
+    password_confirmation: "",
+    erros: []
+  };
 
   handleInputChange = (key, value) => {
     this.setState({
       [key]: value
-    })
-  }
+    });
+  };
+
+  setErrors = errors => this.setState({errors: [...errors]})
 
   submit = e => {
-    e.preventDefault()
-    BackendAdapter.signup(this.state).then(
-      user => this.props.login(user))
-  }
-
+    e.preventDefault();
+    BackendAdapter.signup(this.state).then(user => {
+        if (user && user.error) {
+            this.setErrors([user.error])
+        } else if (user && user.errors) {
+            this.setErrors(user.errors)
+        } else if (user && user.id) {
+            this.props.login(user);
+        } else {
+            this.setErrors(["Something Went Wrong!"])
+            console.log("Return Value from server: ", user)
+        }
+    });
+  };
 
   render() {
     return (
@@ -50,10 +60,10 @@ class SignupForm extends React.Component {
           value={this.state.password_confirmation}
         />
         <Form.Button>Submit</Form.Button>
-        <a href= "/login">Click here</a> to log in!
+        <a href="/login">Click here</a> to log in!
       </Form>
-    )
+    );
   }
 }
 
-export default SignupForm
+export default SignupForm;
