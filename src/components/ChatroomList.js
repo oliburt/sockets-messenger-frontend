@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Header } from "semantic-ui-react";
 import BackendAdapter from '../adapters/BackendAdapter';
 import '../styles/Chat.css'
-import '../styles/ChannelList.css'
+import '../styles/ChatroomList.css'
 
-const ChannelList = ({channels, handleClick, selectedChannel}) => {
+const ChatroomList = ({channels, handleClick, selectedChannel}) => {
     
     const [newChannelDisplay, setNewChannelDisplay] = useState(false);
     const [newChannelName, setNewChannelName] = useState('');
@@ -28,8 +28,8 @@ const ChannelList = ({channels, handleClick, selectedChannel}) => {
     }
 
     return (
-        <div className="channel-list">
-            <h1 className="chatrooms-title">Channel List</h1>
+        <div className="chatroom-list">
+            <Header as='h4' className="chatrooms-title">Chatrooms</Header>
             <Button className="add-chat-button" onClick={() => setNewChannelDisplay(!newChannelDisplay)}>{newChannelDisplay ? '-' : '+'}</Button>
             {
                 newChannelDisplay ?
@@ -49,4 +49,4 @@ const ChannelList = ({channels, handleClick, selectedChannel}) => {
     );
 }
 
-export default ChannelList;
+export default ChatroomList;
