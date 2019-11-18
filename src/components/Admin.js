@@ -1,27 +1,28 @@
-import React from "react";
-import { Icon, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Icon } from "semantic-ui-react";
 import "../styles/Admin.css";
+import DropBox from "./DropBox";
 
 const Admin = ({ currentUser, logout }) => {
-  return currentUser ? (
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  return (
     <div className="admin-container">
-      <Icon name="user circle" color="black" />
-      <span>{currentUser.username}</span>
-      <Button onClick={() => logout()}>
-        Logout
-      </Button>
-    </div>
-  ) : (
-    <div className="admin-container">
-      <Icon name="user circle" color="black" />
-      <span>Guest User</span>
-      <Button as={Link} to="/login">
-        Login
-      </Button>
-      <Button as={Link} to="/signup">
-        Sign Up
-      </Button>
+      <div onClick={() => setShowDropdown(!showDropdown)}>
+        <Icon name="user circle" color="black" />
+        <span>{currentUser ? currentUser.username : "Guest User"}</span>
+        <Icon name="dropdown" />
+      </div>
+      {showDropdown ? (
+        <div className="dropdown-content">
+          <DropBox
+            currentUser={currentUser}
+            showDropdown={showDropdown}
+            setShowDropdown={setShowDropdown}
+            logout={logout}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
