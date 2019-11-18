@@ -22,15 +22,15 @@ div.main-container > div {
 }
 
 
-form.ui.form > div.field > textarea.message-input {
+div.messageForm > form.ui.form > div.field > textarea.message-input {
   height: 100%;
   resize: none;
 }
 
-form.ui.form {
+div.messageForm > form.ui.form {
   height: 100%;
 }
-form.ui.form > div.field {
+div.messageForm > form.ui.form > div.field {
   height: 100%;
 }
 
