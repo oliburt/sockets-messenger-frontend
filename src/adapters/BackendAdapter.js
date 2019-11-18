@@ -1,5 +1,5 @@
 // const BASE_URL = "https://s-i-backend.herokuapp.com";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:3000/api/v1";
 
 // const BASE_WS_URL = "wss://s-i-backend.herokuapp.com/cable";
 const BASE_WS_URL = "ws://localhost:3000/cable";
