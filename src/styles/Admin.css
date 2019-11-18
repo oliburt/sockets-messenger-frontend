@@ -1,0 +1,10 @@
+div.admin-container {
+    background-color: #a9c4f5;
+    border-radius: 1.5rem;
+    height: 10%;
+    text-align: left;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    width: 90%;
+    margin: 1rem auto;
+}
