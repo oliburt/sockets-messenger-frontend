@@ -55,7 +55,7 @@ const login = userDetails =>
       if (userDetails.token) {
         localStorage.setItem('token', userDetails.token)
       }
-      return userDetails.user
+      return userDetails.user || userDetails
     })
     .catch(handleError)
 
@@ -71,7 +71,7 @@ const signup = userDetails =>
         if (userDetails.token) {
           localStorage.setItem('token', userDetails.token)
         }
-        return userDetails.user
+        return userDetails.user || userDetails
 })
 .catch(handleError)
 
