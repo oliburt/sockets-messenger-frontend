@@ -4,18 +4,30 @@ import Cable from "../components/Cable";
 import Conversation from "../components/Conversation";
 import MessageForm from "../components/MessageForm";
 import SideBar from "./SideBar";
+import MessagingContainer from "./MessagingContainer";
+import NewChatroomForm from "../components/NewChatroomForm";
 
 export class ChatContainer extends Component {
   state = {
     chatrooms: [],
-    selectedChannel: null
+    selectedChannel: null,
+    mainDisplay: "None"
   };
+
+  setMainDisplay = value => this.setState({ mainDisplay: value });
 
   componentDidMount = () =>
     BackendAdapter.get(BackendAdapter.CHATROOMS_URL).then(this.setChatrooms);
 
   setChatrooms = chatrooms => this.setState({ chatrooms });
   setSelectedChannel = selectedChannel => this.setState({ selectedChannel });
+
+  handleChannelClick = channel => {
+      this.setState({
+        selectedChannel: channel,
+        mainDisplay: "Chatroom"
+      })
+  }
 
   handleReceivedChatroom = response => {
     if (response.deleted) {
@@ -46,6 +58,21 @@ export class ChatContainer extends Component {
     this.setChatrooms(chatroomsCopy);
   };
 
+  renderMainContent = mainDisplay => {
+    const { chatrooms, selectedChannel } = this.state;
+
+    if (mainDisplay === "None") return <div>NOne</div>;
+    if (mainDisplay === "Chatroom")
+      return (
+        <MessagingContainer
+          conversation={this.getSelectedChannel(chatrooms, selectedChannel)}
+          selectedChannel={this.getSelectedChannel(chatrooms, selectedChannel)}
+          user={this.props.user}
+        />
+      );
+    if (mainDisplay === 'NewChatroom') return <NewChatroomForm setMainDisplay={this.setMainDisplay}/>
+  };
+
   render() {
     const { chatrooms, selectedChannel } = this.state;
 
@@ -69,26 +96,13 @@ export class ChatContainer extends Component {
 
         <SideBar
           channels={this.getChannelNames(chatrooms)}
-          handleChannelClick={this.setSelectedChannel}
+          handleChannelClick={this.handleChannelClick}
           selectedChannel={selectedChannel}
           user={this.props.user}
           logout={this.props.logout}
+          setMainDisplay={this.setMainDisplay}
         />
-        <div className="messaging-container">
-          <Conversation
-            conversation={this.getSelectedChannel(chatrooms, selectedChannel)}
-            currentUser={this.props.user}
-          />
-          {selectedChannel ? (
-            <MessageForm
-              selectedChannel={this.getSelectedChannel(
-                chatrooms,
-                selectedChannel
-              )}
-              user={this.props.user}
-            />
-          ) : null}
-        </div>
+        {this.renderMainContent(this.state.mainDisplay)}
       </div>
     );
   }
