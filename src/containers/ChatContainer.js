@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
-import { Container, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import Cable from "../components/Cable";
 import ChannelList from "../components/ChannelList";
 import Conversation from "../components/Conversation";
+import MessageForm from "../components/MessageForm";
 
 export class ChatContainer extends Component {
   state = {
@@ -50,7 +51,7 @@ export class ChatContainer extends Component {
     const { chatrooms, selectedChannel } = this.state;
 
     return (
-      <Grid>
+      <Grid className="chat-container">
         <Cable
           channel={{ channel: "ChatroomsChannel" }}
           url={BackendAdapter.BASE_WS_URL}
@@ -79,7 +80,7 @@ export class ChatContainer extends Component {
             conversation={this.getSelectedChannel(chatrooms, selectedChannel)}
             currentUser={this.props.user}
           />
-          message form to go here
+          {selectedChannel ? <MessageForm selectedChannel={this.getSelectedChannel(chatrooms, selectedChannel)} user={this.props.user} /> : null }
         </Grid.Column>
       </Grid>
     );
