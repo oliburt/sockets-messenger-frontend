@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import Cable from "../components/Cable";
-import Conversation from "../components/Conversation";
-import MessageForm from "../components/MessageForm";
+
 import SideBar from "./SideBar";
 import MessagingContainer from "./MessagingContainer";
 import NewChatroomForm from "../components/NewChatroomForm";
