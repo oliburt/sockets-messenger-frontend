@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ChatContainer from "./ChatContainer";
 import { Button} from "semantic-ui-react";
-import '../../UserPage.css'
+import '../styles/UserPage.css'
 import { Link } from 'react-router-dom'
 
 export class HomeContainer extends Component {
