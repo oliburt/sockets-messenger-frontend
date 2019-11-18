@@ -14,7 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     BackendAdapter.validateUser().then(user => {
-      if (!user.id && this.props.history.location.pathname !== '/signup') {
+      if ((!user || !user.id) && this.props.history.location.pathname !== '/signup') {
         this.props.history.push('/login')
       } else {
         this.setUser(user)
