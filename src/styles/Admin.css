@@ -1,10 +1,54 @@
 div.admin-container {
     background-color: #a9c4f5;
     border-radius: 1.5rem;
-    height: 10%;
+    min-height: 5%;
     text-align: left;
     font-size: 1.3rem;
-    padding: 0.5rem;
     width: 90%;
     margin: 1rem auto;
+    cursor: pointer;
+}
+div.admin-container > div:nth-child(1) {
+    padding: 0.5rem;
+}
+
+div.admin-container:hover {
+    background-color: #7ba5f0;
+}
+
+div.admin-container i.dropdown.icon {
+    float: right;
+}
+
+div.admin-container > i.user.circle.icon {
+    margin-top: 2px;
+}
+
+div.dropdown-content {
+    background-color: #f1f1f1;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+div.dropdown-content > div {
+    color: black;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    display: block;
+}
+
+div.dropdown-content > div:hover {
+    background-color: #d7d5d5;
+}
+
+div.dropdown-content.show {
+    display: block;
+}
+
+div.admin-container.show-drop {
+    border-bottom-right-radius: 0rem;
+    border-bottom-left-radius: 0rem;
 }
