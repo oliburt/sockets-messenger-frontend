@@ -14,12 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     BackendAdapter.validateUser().then(user => {
-      if (
-        (!user || !user.id) &&
-        this.props.history.location.pathname !== "/signup"
-      ) {
-        this.props.history.push("/login");
-      } else {
+      if (user && user.id) {
         this.setUser(user);
       }
     });
@@ -34,7 +29,6 @@ class App extends Component {
   logout = () => {
     BackendAdapter.logout();
     this.setState({ user: null });
-    this.props.history.push("/login");
   };
 
   render() {
