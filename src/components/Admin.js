@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Admin = () => {
-    return (
+const Admin = ({currentUser}) => {
+    
+    return (currentUser ? 
         <div>
-            
-        </div>
+            {currentUser.username}
+        </div> : null
     );
 }
 

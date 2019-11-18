@@ -71,6 +71,7 @@ export class ChatContainer extends Component {
           channels={this.getChannelNames(chatrooms)}
           handleChannelClick={this.setSelectedChannel}
           selectedChannel={selectedChannel}
+          user={this.props.user}
         />
         <div className="messaging-container">
           <Conversation

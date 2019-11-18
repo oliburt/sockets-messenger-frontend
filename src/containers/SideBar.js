@@ -1,11 +1,12 @@
 import React from "react";
 import ChannelList from "../components/ChannelList";
 import '../styles/Chat.css'
+import Admin from "../components/Admin";
 
-const SideBar = ({channels, handleChannelClick, selectedChannel}) => {
+const SideBar = ({channels, handleChannelClick, selectedChannel, user}) => {
   return (
     <div className="sidebar">
-      <div>Login etc...</div>
+      <Admin currentUser={user} /> 
       <ChannelList
         channels={channels}
         handleClick={handleChannelClick}
