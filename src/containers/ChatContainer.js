@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import { Container, Grid } from "semantic-ui-react";
 import Cable from "../components/Cable";
+import ChannelList from "../components/ChannelList";
 
 export class ChatContainer extends Component {
   state = {
@@ -27,6 +28,9 @@ export class ChatContainer extends Component {
       this.setChatrooms([...this.state.chatrooms, chatroom]);
     }
   };
+
+  getChannelNames = chatrooms =>
+    chatrooms.map(room => ({ id: room.id, name: room.name }));
 
   handleReceivedMessage = response => {
     const { message } = response;
@@ -58,6 +62,17 @@ export class ChatContainer extends Component {
               />
             ))
           : null}
+
+        <Grid.Column className="noPadding" width={5}>
+          <ChannelList
+            channels={this.getChannelNames(chatrooms)}
+            handleClick={this.setSelectedChannel}
+            selectedChannel={selectedChannel}
+          />
+        </Grid.Column>
+        <Grid.Column width={11}>
+          conversation and message form to go here
+        </Grid.Column>
       </Grid>
     );
   }
