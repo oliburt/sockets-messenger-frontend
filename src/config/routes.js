@@ -18,14 +18,5 @@ export const routes = [
     title: 'Sign up',
     path: '/signup',
     component: SignupForm
-  },
-  {
-    title: 'Log out',
-    path: '/logout',
-    component: props => {
-      props.logout()
-
-      return null
-    }
   }
 ]
