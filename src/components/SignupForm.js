@@ -1,13 +1,14 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Message } from "semantic-ui-react";
 import BackendAdapter from "../adapters/BackendAdapter";
+import { Link } from "react-router-dom";
 
 class SignupForm extends React.Component {
   state = {
     username: "",
     password: "",
     password_confirmation: "",
-    erros: []
+    errors: []
   };
 
   handleInputChange = (key, value) => {
@@ -16,21 +17,27 @@ class SignupForm extends React.Component {
     });
   };
 
-  setErrors = errors => this.setState({errors: [...errors]})
+  setErrors = errors => this.setState({ errors: [...errors] });
 
   submit = e => {
     e.preventDefault();
-    BackendAdapter.signup(this.state).then(user => {
-        if (user && user.error) {
-            this.setErrors([user.error])
-        } else if (user && user.errors) {
-            this.setErrors(user.errors)
-        } else if (user && user.id) {
-            this.props.login(user);
-        } else {
-            this.setErrors(["Something Went Wrong!"])
-            console.log("Return Value from server: ", user)
-        }
+    const user = {
+        username: this.state.username,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation
+    }
+
+    BackendAdapter.signup(user).then(user => {
+      if (user && user.error) {
+        this.setErrors([user.error]);
+      } else if (user && user.errors) {
+        this.setErrors(user.errors);
+      } else if (user && user.id) {
+        this.props.login(user);
+      } else {
+        this.setErrors(["Something Went Wrong!"]);
+        console.log("Return Value from server: ", user);
+      }
     });
   };
 
@@ -40,11 +47,18 @@ class SignupForm extends React.Component {
         onSubmit={this.submit}
         onChange={e => this.handleInputChange(e.target.name, e.target.value)}
       >
+        {this.state.errors.length > 0 ? (
+          <Message negative>
+              {this.state.errors.map(error => (
+                <p key={error}>{error}</p>
+              ))}
+          </Message>
+        ) : null}
         <Form.Input
           name="username"
           type="username"
           placeholder="username"
-          autocomplete="username"
+          autoComplete="username"
           value={this.state.username}
         />
         <Form.Input
@@ -60,7 +74,7 @@ class SignupForm extends React.Component {
           value={this.state.password_confirmation}
         />
         <Form.Button>Submit</Form.Button>
-        <a href="/login">Click here</a> to log in!
+        <Link to="/login">Click here</Link> to log in!
       </Form>
     );
   }
