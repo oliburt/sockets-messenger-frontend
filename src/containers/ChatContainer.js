@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
-import { Grid } from "semantic-ui-react";
 import Cable from "../components/Cable";
-import ChannelList from "../components/ChannelList";
 import Conversation from "../components/Conversation";
 import MessageForm from "../components/MessageForm";
+import SideBar from "./SideBar";
 
 export class ChatContainer extends Component {
   state = {
@@ -51,7 +50,7 @@ export class ChatContainer extends Component {
     const { chatrooms, selectedChannel } = this.state;
 
     return (
-      <Grid className="chat-container">
+      <div className="main-container">
         <Cable
           channel={{ channel: "ChatroomsChannel" }}
           url={BackendAdapter.BASE_WS_URL}
@@ -68,21 +67,27 @@ export class ChatContainer extends Component {
             ))
           : null}
 
-        <Grid.Column className="noPadding" width={5}>
-          <ChannelList
-            channels={this.getChannelNames(chatrooms)}
-            handleClick={this.setSelectedChannel}
-            selectedChannel={selectedChannel}
-          />
-        </Grid.Column>
-        <Grid.Column width={11}>
+        <SideBar
+          channels={this.getChannelNames(chatrooms)}
+          handleChannelClick={this.setSelectedChannel}
+          selectedChannel={selectedChannel}
+        />
+        <div className="messaging-container">
           <Conversation
             conversation={this.getSelectedChannel(chatrooms, selectedChannel)}
             currentUser={this.props.user}
           />
-          {selectedChannel ? <MessageForm selectedChannel={this.getSelectedChannel(chatrooms, selectedChannel)} user={this.props.user} /> : null }
-        </Grid.Column>
-      </Grid>
+          {selectedChannel ? (
+            <MessageForm
+              selectedChannel={this.getSelectedChannel(
+                chatrooms,
+                selectedChannel
+              )}
+              user={this.props.user}
+            />
+          ) : null}
+        </div>
+      </div>
     );
   }
 }

@@ -1,13 +1,13 @@
 import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
-import HomeContainer from '../containers/HomeContainer'
+import ChatContainer from '../containers/ChatContainer'
 
 
 export const routes = [
   {
     title: 'Home',
     path: '/',
-    component: HomeContainer
+    component: ChatContainer
   },
   {
     title: 'Log in',

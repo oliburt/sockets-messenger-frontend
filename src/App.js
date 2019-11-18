@@ -14,32 +14,33 @@ class App extends Component {
 
   componentDidMount() {
     BackendAdapter.validateUser().then(user => {
-      if ((!user || !user.id) && this.props.history.location.pathname !== '/signup') {
-        this.props.history.push('/login')
+      if (
+        (!user || !user.id) &&
+        this.props.history.location.pathname !== "/signup"
+      ) {
+        this.props.history.push("/login");
       } else {
-        this.setUser(user)
+        this.setUser(user);
       }
-    })
+    });
   }
 
   login = user => {
-    this.setState({ user }, () => this.props.history.push('/'))
-  }
+    this.setState({ user }, () => this.props.history.push("/"));
+  };
 
-  setUser = user => this.setState({user})
-
+  setUser = user => this.setState({ user });
 
   logout = () => {
-    BackendAdapter.logout()
-    this.setState({ user: null })
-    this.props.history.push('/login')
-  }
+    BackendAdapter.logout();
+    this.setState({ user: null });
+    this.props.history.push("/login");
+  };
 
   render() {
     return (
       <div className="App">
-
-        <Container >
+        <Container>
           {routes.map(route => (
             <Route
               key={route.path}
@@ -63,7 +64,7 @@ class App extends Component {
           ))}
         </Container>
       </div>
-    )
+    );
   }
 }
 

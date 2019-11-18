@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
-import { Form, Button } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 const MessageForm = ({ user, selectedChannel }) => {
   const [message, setMessage] = useState("");
@@ -17,18 +17,15 @@ const MessageForm = ({ user, selectedChannel }) => {
   };
 
   return (
-    <div className="messageForm flex-item-2">
+    <div className="messageForm">
       <Form onSubmit={handleSubmit}>
         <Form.Field>
-          <input
+          <textarea
             placeholder="message"
             value={message}
             onChange={e => setMessage(e.target.value)}
             className="message-input"
           />
-          <Button type="submit" className="send-button">
-            <span class="right"></span>
-          </Button>
         </Form.Field>
       </Form>
     </div>

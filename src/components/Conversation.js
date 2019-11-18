@@ -15,7 +15,7 @@ const Conversation = ({conversation, currentUser}) => {
 
     
     return conversation ? (
-        <div className="flex-item-1">
+        <div>
             <h2>{conversation.name}</h2>
             <span>{conversation.description}</span>
             <ScrollToBottom className="messages-container">

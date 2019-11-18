@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Button, Form } from "semantic-ui-react";
 import BackendAdapter from '../adapters/BackendAdapter';
 import '../styles/Chat.css'
+import '../styles/ChannelList.css'
 
 const ChannelList = ({channels, handleClick, selectedChannel}) => {
     
@@ -27,8 +28,8 @@ const ChannelList = ({channels, handleClick, selectedChannel}) => {
     }
 
     return (
-        <>
-            <h1 className="chatrooms-title">Chat</h1>
+        <div className="channel-list">
+            <h1 className="chatrooms-title">Channel List</h1>
             <Button className="add-chat-button" onClick={() => setNewChannelDisplay(!newChannelDisplay)}>{newChannelDisplay ? '-' : '+'}</Button>
             {
                 newChannelDisplay ?
@@ -44,7 +45,7 @@ const ChannelList = ({channels, handleClick, selectedChannel}) => {
             <ul className="channel-list">
                 {channels ? channels.map(channel => <li key={channel.id} onClick={e => handleClick(channel.id)} className={selectedChannel === channel.id ? 'selected' : null}>{channel.name}<Button onClick={e => handleDeleteButtonClick(e, channel)} className="channel-del-btn">-</Button></li>) : null}
             </ul>
-        </>
+        </div>
     );
 }
 
