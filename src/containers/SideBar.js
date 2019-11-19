@@ -9,7 +9,8 @@ const SideBar = ({
   selectedChannel,
   user,
   setMainDisplay,
-  logout
+  logout,
+  mainDisplay
 }) => {
   return (
     <div className="sidebar">
@@ -19,6 +20,7 @@ const SideBar = ({
         handleClick={handleChannelClick}
         selectedChannel={selectedChannel}
         setMainDisplay={setMainDisplay}
+        mainDisplay={mainDisplay}
       />
     </div>
   );
