@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import Cable from "../components/Cable";
-
 import SideBar from "./SideBar";
 import MessagingContainer from "./MessagingContainer";
 import NewChatroomForm from "../components/NewChatroomForm";
+import "../styles/Chat.css";
 
 export class ChatContainer extends Component {
   state = {
@@ -22,11 +22,11 @@ export class ChatContainer extends Component {
   setSelectedChannel = selectedChannel => this.setState({ selectedChannel });
 
   handleChannelClick = channel => {
-      this.setState({
-        selectedChannel: channel,
-        mainDisplay: "Chatroom"
-      })
-  }
+    this.setState({
+      selectedChannel: channel,
+      mainDisplay: "Chatroom"
+    });
+  };
 
   handleReceivedChatroom = response => {
     if (response.deleted) {
@@ -69,11 +69,12 @@ export class ChatContainer extends Component {
           user={this.props.user}
         />
       );
-    if (mainDisplay === 'NewChatroom') return <NewChatroomForm setMainDisplay={this.setMainDisplay}/>
+    if (mainDisplay === "NewChatroom")
+      return <NewChatroomForm setMainDisplay={this.setMainDisplay} />;
   };
 
   render() {
-    const { chatrooms, selectedChannel } = this.state;
+    const { chatrooms, selectedChannel, mainDisplay } = this.state;
 
     return (
       <div className="main-container">
@@ -100,8 +101,11 @@ export class ChatContainer extends Component {
           user={this.props.user}
           logout={this.props.logout}
           setMainDisplay={this.setMainDisplay}
+          mainDisplay={mainDisplay}
         />
-        {this.renderMainContent(this.state.mainDisplay)}
+        <div id="main-content">
+          {this.renderMainContent(this.state.mainDisplay)}
+        </div>
       </div>
     );
   }
