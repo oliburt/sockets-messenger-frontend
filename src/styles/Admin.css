@@ -35,7 +35,7 @@ div.dropdown-content {
 
 div.dropdown-content > div {
     color: black;
-    padding: 1rem 1.2rem;
+    padding: 0.5rem 1rem;
     text-decoration: none;
     display: block;
 }
