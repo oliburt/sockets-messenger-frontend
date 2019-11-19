@@ -60,7 +60,7 @@ export class ChatContainer extends Component {
   renderMainContent = mainDisplay => {
     const { chatrooms, selectedChannel } = this.state;
 
-    if (mainDisplay === "None") return <div>NOne</div>;
+    if (mainDisplay === "None") return <div>Select a chatroom</div>;
     if (mainDisplay === "Chatroom")
       return (
         <MessagingContainer
