@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Header } from "semantic-ui-react";
 import BackendAdapter from "../adapters/BackendAdapter";
+import "../styles/NewChatroom.css";
 
 const NewChatroomForm = ({ setMainDisplay }) => {
   const [chatroomName, setChatroomName] = useState("");
@@ -19,11 +20,13 @@ const NewChatroomForm = ({ setMainDisplay }) => {
   };
 
   return (
-    <div>
+    <div className="new-chat-container">
       <Form onSubmit={handleSubmit}>
+        <Header as='h1'>New Chatroom</Header>
         <Form.Input
           className="add-chat-input"
           type="text"
+          label="Name"
           placeholder="Channel Name"
           value={chatroomName}
           onChange={e => setChatroomName(e.target.value)}
@@ -31,6 +34,7 @@ const NewChatroomForm = ({ setMainDisplay }) => {
         <Form.TextArea
           placeholder="Description..."
           className="add-chat-input"
+          label="Description"
           value={chatroomDescription}
           onChange={e => setChatroomDescription(e.target.value)}
         />
