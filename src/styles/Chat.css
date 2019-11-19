@@ -17,9 +17,7 @@ div.messaging-container div:nth-child(2) {
   height: 20%;
 }
 
-div.main-container > div {
-  border: 1px black solid;
-}
+
 
 
 div.messageForm > form.ui.form > div.field > textarea.message-input {
@@ -36,4 +34,8 @@ div.messageForm > form.ui.form > div.field {
 
 div.sidebar {
   background-color: cornflowerblue;
+}
+
+div#main-content {
+  background-color: #d9e7ff;
 }
