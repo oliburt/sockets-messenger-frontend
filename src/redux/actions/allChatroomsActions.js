@@ -17,8 +17,3 @@ export const handleReceivedChatroom = response => dispatch => {
     dispatch({ type: ACTION_TYPES.ADD_CHATROOM, chatroom });
   }
 };
-
-export const handleReceivedMessage = response => dispatch => {
-    const {message} = response
-    dispatch({ type: ACTION_TYPES.ADD_MESSAGE, message });
-};
