@@ -11,10 +11,10 @@ export const getUsersChatrooms = () => dispatch => {
 export const handleReceivedChatroom = response => dispatch => {
   if (response.deleted) {
     const chatroomId = response.chatroom.chatroom.id;
-    dispatch({ type: ACTION_TYPES.REMOVE_CHATROOM, id: chatroomId });
+    dispatch({ type: ACTION_TYPES.REMOVE_USER_CHATROOM, id: chatroomId });
   } else {
     const { chatroom } = response;
-    dispatch({ type: ACTION_TYPES.ADD_CHATROOM, chatroom });
+    dispatch({ type: ACTION_TYPES.ADD_USER_CHATROOM, chatroom });
   }
 };
 
