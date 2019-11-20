@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import { Form, Message } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import actionTypes from "../redux/reducers/actionTypes";
+import { connect } from "react-redux";
 
 export class LoginForm extends Component {
   state = {
@@ -30,6 +32,7 @@ export class LoginForm extends Component {
         this.setErrors(user.errors);
       } else if (user && user.id) {
         this.props.login(user);
+        this.props.history.push('/')
       } else {
         this.setErrors(["Something Went Wrong!"]);
         console.log("Return Value from server: ", user);
@@ -70,4 +73,9 @@ export class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+const mapDispatchToProps = dispatch => ({
+  login: user => dispatch({type: actionTypes.ADD_USER, user})
+})
+
+
+export default connect(null, mapDispatchToProps)(LoginForm)
