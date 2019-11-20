@@ -80,8 +80,8 @@ export class ChatContainer extends Component {
           url={BackendAdapter.BASE_WS_URL}
           onReceived={this.props.handleReceivedChatroom}
         />
-        {this.props.chatrooms.length
-          ? this.props.chatrooms.map(room => (
+        {this.props.userChatrooms.length
+          ? this.props.userChatrooms.map(room => (
               <Cable
                 key={room.id}
                 channel={{ channel: "MessagesChannel", chatroom: room.id }}
@@ -105,7 +105,7 @@ export class ChatContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  chatrooms: state.chatroomsStore.chatrooms
+  userChatrooms: state.chatroomsStore.userChatrooms
 })
 
 const mapDispatchToProps = dispatch => ({
