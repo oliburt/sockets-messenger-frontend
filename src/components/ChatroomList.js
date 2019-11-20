@@ -3,14 +3,18 @@ import { Button, Header, Icon } from "semantic-ui-react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import "../styles/Chat.css";
 import "../styles/ChatroomList.css";
+import { connect } from 'react-redux'
+import actionTypes from "../redux/reducers/actionTypes";
+
 
 const ChatroomList = ({
-  channels,
   handleClick,
-  selectedChannel,
   setMainDisplay,
-  mainDisplay
+  mainDisplay,
+  chatrooms,
+  selectedChatroom
 }) => {
+
   const handleDeleteButtonClick = (e, channel) => {
     e.stopPropagation();
     BackendAdapter.deleteChatroom(channel.id);
@@ -31,16 +35,16 @@ const ChatroomList = ({
       </Header>
 
       <div className="chatroom-list">
-        {channels
-          ? channels.map(channel => (
+        {chatrooms
+          ? chatrooms.map(room => (
               <div
-                key={channel.id}
-                onClick={e => handleClick(channel.id)}
-                className={(selectedChannel === channel.id && mainDisplay === "Chatroom") ? "active" : null}
+                key={room.id}
+                onClick={e => handleClick(room.id)}
+                className={(selectedChatroom === room.id && mainDisplay === "Chatroom") ? "active" : null}
               >
-                <p><Icon name="chat"/>{channel.name}</p>
+                <p><Icon name="chat"/>{room.name}</p>
                 {/* <Button
-                onClick={e => handleDeleteButtonClick(e, channel)}
+                onClick={e => handleDeleteButtonClick(e, room)}
                 className="channel-del-btn"
               >
                 -
@@ -53,4 +57,13 @@ const ChatroomList = ({
   );
 };
 
-export default ChatroomList;
+const mapStateToProps = state => ({
+  chatrooms: state.chatroomsStore.chatrooms,
+  selectedChatroom: state.chatroomsStore.selectedChatroom,
+})
+
+const mapDispatchToProps = dispatch => ({
+  handleClick: id => dispatch({type: actionTypes.SELECT_CHATROOM, selectedChatroomId: id})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatroomList)
