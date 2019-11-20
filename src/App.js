@@ -6,8 +6,8 @@ import BackendAdapter from "./adapters/BackendAdapter";
 import { routes } from "./config/routes";
 import { connect } from 'react-redux'
 import { validateUser } from './redux/actions/userActions'
-import { getChatrooms } from './redux/actions/userChatroomActions'
-import actionTypes from './redux/reducers/actionTypes'
+import { getAllChatrooms } from './redux/actions/allChatroomsActions'
+import { getUsersChatrooms } from './redux/actions/userChatroomActions'
 
 
 const notFoundMessage = () => <Message negative>NOT FOUND</Message>;
@@ -17,7 +17,8 @@ class App extends Component {
 
   componentDidMount() {
     this.props.validateUser()
-    this.props.getChatrooms()
+    this.props.getAllChatrooms()
+    this.props.getUsersChatrooms()
   }
 
   login = user => {
@@ -55,9 +56,11 @@ class App extends Component {
   }
 }
 
+
 const mapDispatchToProps = dispatch => ({
   validateUser: () => dispatch(validateUser()),
-  getChatrooms: () => dispatch(getChatrooms())
+  getAllChatrooms: () => dispatch(getAllChatrooms()),
+  getUsersChatrooms: () => dispatch(getUsersChatrooms()),
 })
 
 export default connect(null, mapDispatchToProps)(App)
