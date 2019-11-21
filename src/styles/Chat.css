@@ -38,6 +38,7 @@ div.messageForm > form.ui.form > div.field > input{
 
 div.sidebar {
   background-color: cornflowerblue;
+  overflow-y: scroll;
 }
 
 div#main-content {
@@ -96,5 +97,8 @@ div.messaging-container > div > h2 {
 #add-my-chat-btn:hover {
   background-color: #56c771db;
   box-shadow: 0 0.3rem 0.6rem rgb(157, 187, 252);
+}
 
+#chatroom-list, #dm-list {
+  margin-top: 2rem;
 }
