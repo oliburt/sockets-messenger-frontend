@@ -10,7 +10,6 @@ function UserSearchResult({
   user,
   userChatrooms,
   setSelectedChatroom,
-  getAndSelectChatroom,
   setMainDisplay,
   allUsers,
   currentUser

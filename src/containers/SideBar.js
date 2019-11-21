@@ -5,11 +5,10 @@ import "../styles/ChatroomList.css"
 import Admin from "../components/Admin";
 import { connect } from 'react-redux'
 import actionTypes from "../redux/reducers/actionTypes";
+import DMList from "../components/DMList";
 
 
 const SideBar = ({
-  channels,
-  selectedChannel,
   user,
   setMainDisplay,
   logout,
@@ -43,11 +42,9 @@ const SideBar = ({
         <p>+ New Direct Message</p>
       </div> : null}
       <ChatroomList
-        channels={channels}
-        selectedChannel={selectedChannel}
-        setMainDisplay={setMainDisplay}
-        mainDisplay={mainDisplay}
+
       />
+      <DMList />
     </div>
   );
 };

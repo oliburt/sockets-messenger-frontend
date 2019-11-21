@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import actionTypes from "../redux/reducers/actionTypes";
 
 
-const ChatroomList = ({
+const DMList = ({
   setMainDisplay,
   mainDisplay,
   usersChatrooms,
@@ -19,18 +19,18 @@ const ChatroomList = ({
     setMainDisplay("Chatroom")
   }
 
-  const publicUserChatrooms = usersChatrooms.filter(room => room.public)
+  const privateUserChatrooms = usersChatrooms.filter(room => !room.public)
 
   return (
     <div>
       
       <Header as="h4" className="chatrooms-title">
-        My Chatrooms
+        Direct Messages
       </Header>
 
       <div className="chatroom-list">
-        {publicUserChatrooms
-          ? publicUserChatrooms.map(room => (
+        {privateUserChatrooms
+          ? privateUserChatrooms.map(room => (
               <div
                 key={room.id}
                 onClick={e => handleClick(room)}
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   setMainDisplay: payload => dispatch({type: actionTypes.SET_MAIN_DISPLAY, payload})
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatroomList)
+export default connect(mapStateToProps, mapDispatchToProps)(DMList)

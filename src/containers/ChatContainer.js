@@ -21,27 +21,24 @@ export class ChatContainer extends Component {
     this.props.getUsersChatrooms();
   }
 
-
   getChatroomNames = chatrooms =>
     chatrooms.map(room => ({ id: room.id, name: room.name }));
 
   getSelectedChannel = (chatrooms, selectedChannel) =>
     chatrooms.find(room => room.id === selectedChannel);
 
-
   renderMainContent = mainDisplay => {
     if (mainDisplay === "None") return <div>Select a chatroom</div>;
     if (mainDisplay === "Chatroom") return <MessagingContainer />;
     if (mainDisplay === "Explore") return <FindChatrooms />;
     if (mainDisplay === "NewDM") return <FindUsers />;
-    if (mainDisplay === "NewChatroom")
-      return <NewChatroomForm />;
+    if (mainDisplay === "NewChatroom") return <NewChatroomForm />;
   };
 
   render() {
     return (
       <div className="main-container">
-      <PresenceCable />
+        <PresenceCable />
 
         <Cable
           channel={{ channel: "ChatroomsChannel" }}
@@ -57,10 +54,7 @@ export class ChatContainer extends Component {
             ))
           : null}
 
-        <SideBar
-          handleChannelClick={this.handleChannelClick}
-          mainDisplay={this.props.mainDisplay}
-        />
+        <SideBar />
         <div id="main-content">
           {this.renderMainContent(this.props.mainDisplay)}
         </div>
@@ -75,7 +69,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleReceivedChatroom: response => dispatch(handleReceivedChatroom(response)),
+  handleReceivedChatroom: response =>
+    dispatch(handleReceivedChatroom(response)),
   handleReceivedMessage: response => dispatch(handleReceivedMessage(response)),
   getAllChatrooms: () => dispatch(getAllChatrooms()),
   getUsersChatrooms: () => dispatch(getUsersChatrooms())
