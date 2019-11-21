@@ -11,6 +11,13 @@ export const isChatroomInUserChatrooms = (userChatrooms, chatroom) => {
   return userChatrooms.find(room => room.id === chatroom.id);
 };
 
+export const getDMUser = (room, allUsers, currentUser) => {
+  const users = room.users.map(userId =>
+    allUsers.find(user => user.id === userId)
+  );
+  return users.find(user => user.id !== currentUser.id);
+};
+
 export const formatDateTime = datetime => {
   const date = new Date(datetime);
   const months = [
@@ -26,9 +33,16 @@ export const formatDateTime = datetime => {
     "Oct",
     "Nov",
     "Dec"
-  ]
-  const today = new Date()
-  const isToday = date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()
-  
-  return `${date.getHours()}:${date.getMinutes()}${isToday ? '' : `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}}`}`;
+  ];
+  const today = new Date();
+  const isToday =
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear();
+
+  return `${date.getHours()}:${date.getMinutes()}${
+    isToday
+      ? ""
+      : `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}}`
+  }`;
 };
