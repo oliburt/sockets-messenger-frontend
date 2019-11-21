@@ -5,7 +5,8 @@ import { Icon } from "semantic-ui-react";
 import {
   isUserActive,
   formatDateTime,
-  isChatroomInUserChatrooms
+  isChatroomInUserChatrooms,
+  getDMUser
 } from "../helpers/helperFunctions";
 import { connect } from "react-redux";
 import { addChatroomToUsersChatrooms } from "../redux/actions/userChatroomActions";
@@ -52,18 +53,23 @@ const Conversation = ({
 
   return chatroom ? (
     <div>
-      <h2>{chatroom.name}</h2>
-      {currentUser &&
-      chatroom &&
-      isChatroomInUserChatrooms(userChatrooms, chatroom) ? null : (
-        <button
-          id="add-my-chat-btn"
-          onClick={() => addChatroomToUsersChatrooms(chatroom)}
-        >
-          + Add To My Chatrooms
-        </button>
+      {chatroom.public ? (
+        <>
+          <h2>{chatroom.name}</h2>
+          {!currentUser ||
+          isChatroomInUserChatrooms(userChatrooms, chatroom) ? null : (
+            <button
+              id="add-my-chat-btn"
+              onClick={() => addChatroomToUsersChatrooms(chatroom)}
+            >
+              + Add To My Chatrooms
+            </button>
+          )}
+          <span id="chatroom-description">About: {chatroom.description}</span>
+        </>
+      ) : (
+        <h2> {getDMUser(chatroom, allUsers, currentUser).username}</h2>
       )}
-      <span id="chatroom-description">About: {chatroom.description}</span>
       <div className="message-area">
         <ScrollToBottom className="messages-container">
           {renderMessages(chatroom.messages)}
