@@ -30,7 +30,15 @@ export const signupUser = userDetails => dispatch => {
 
 export const logoutUser = () => dispatch => {
   dispatch({ type: ACTION_TYPES.LOADING_USER });
-  BackendAdapter.logout().then(() =>
-    dispatch({ type: ACTION_TYPES.REMOVE_USER })
-  );
+  BackendAdapter.logout().then(() => {
+    dispatch({ type: ACTION_TYPES.REMOVE_USER_CHATROOMS });
+    dispatch({ type: ACTION_TYPES.REMOVE_USER });
+  });
 };
+
+export const fetchAllUsers = () => dispatch => {
+  dispatch({ type: ACTION_TYPES.LOADING_USER });
+  BackendAdapter.fetchAllUsers().then(users => {
+    dispatch({ type: ACTION_TYPES.SET_ALL_USERS, users})
+  });
+}

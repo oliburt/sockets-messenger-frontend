@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Message } from "semantic-ui-react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import { Link } from "react-router-dom";
-import { loginUser } from '../redux/actions/userActions'
 import { connect } from 'react-redux'
 import actionTypes from "../redux/reducers/actionTypes";
 

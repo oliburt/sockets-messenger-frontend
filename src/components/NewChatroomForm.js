@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button, Header } from "semantic-ui-react";
-import BackendAdapter from "../adapters/BackendAdapter";
+import {postNewChatroom} from "../redux/actions/userChatroomActions";
 import "../styles/NewChatroom.css";
+import { connect } from 'react-redux'
+import actionTypes from "../redux/reducers/actionTypes";
 
-const NewChatroomForm = ({ setMainDisplay }) => {
+
+const NewChatroomForm = ({ setMainDisplay, user, postChatroom }) => {
   const [chatroomName, setChatroomName] = useState("");
   const [chatroomDescription, setChatroomDescription] = useState("");
 
@@ -11,12 +14,14 @@ const NewChatroomForm = ({ setMainDisplay }) => {
     e.preventDefault();
     const data = {
       name: chatroomName,
-      description: chatroomDescription
+      description: chatroomDescription,
+      public: true,
+      creator_id: user.id
     };
     setChatroomDescription("");
     setChatroomName("");
+    postChatroom(data);
     setMainDisplay("None");
-    BackendAdapter.postChatroom(data);
   };
 
   return (
@@ -44,4 +49,13 @@ const NewChatroomForm = ({ setMainDisplay }) => {
   );
 };
 
-export default NewChatroomForm;
+const mapStateToProps = (state) => ({
+  user: state.userStore.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  setMainDisplay: payload => dispatch({type: actionTypes.SET_MAIN_DISPLAY, payload}),
+  postChatroom: chatroomData => dispatch(postNewChatroom(chatroomData))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewChatroomForm)

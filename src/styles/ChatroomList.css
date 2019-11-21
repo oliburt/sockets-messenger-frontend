@@ -13,16 +13,16 @@ div.chatroom-list > div.active {
 
 
 
-div.add-chat {
+div.add-chat, div.explore, div.add-dm {
     text-align: left;
     padding: 0.5rem 1rem;
     background-color: #a9c4f5;
     cursor: pointer;
 }
 
-div.add-chat:hover {
+div.add-chat:hover, div.explore:hover, div.add-dm:hover {
     background-color: #7ba5f0;
 }
-div.add-chat.active {
+div.add-chat.active, div.explore.active, div.add-dm.active {
     background-color: #d9e7ff;
 }

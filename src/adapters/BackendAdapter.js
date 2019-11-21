@@ -3,12 +3,15 @@ const BASE_URL = "http://localhost:3000/api/v1";
 const BASE_WS_URL = "ws://localhost:3000/cable";
 
 const CHATROOMS_URL = `${BASE_URL}/chatrooms`;
-const USER_CHATROOMS_URL = `${BASE_URL}/uchatrooms`;
+const DM_URL = `${BASE_URL}/newdm`
+const CURRENT_USERS_CHATROOMS_URL = `${BASE_URL}/uchatrooms`;
+const USER_CHATROOMS_URL = `${BASE_URL}/user_chatrooms`;
 const MESSAGES_URL = `${BASE_URL}/messages`;
 const LOGIN_URL = `${BASE_URL}/login`;
 const LOGOUT_URL = `${BASE_URL}/logout`;
 const SIGNUP_URL = `${BASE_URL}/signup`;
 const VALIDATE_URL = `${BASE_URL}/validate`;
+const USERS_URL = `${BASE_URL}/users`;
 
 const headers = (more = {}) => ({
   "Content-Type": "application/json",
@@ -22,8 +25,18 @@ const get = url => {
   return fetch(url).then(resToJSON);
 };
 
+const postUserChatroom = chatroom => {
+  const config = {
+    credentials: 'include',
+    headers: headers(),
+    method: 'POST',
+    body: JSON.stringify({chatroom})
+  }
+  return fetch(USER_CHATROOMS_URL, config).then(resToJSON)
+}
+
 const getUserChatrooms = () =>
-  fetch(USER_CHATROOMS_URL, {
+  fetch(CURRENT_USERS_CHATROOMS_URL, {
     credentials: "include"
   })
     .then(handleServerResponse)
@@ -37,6 +50,7 @@ const post = (url, data) => {
   const config = {
     method: "POST",
     headers: headers(),
+    credentials: 'include',
     body: JSON.stringify(data)
   };
   return fetch(url, config);
@@ -142,6 +156,20 @@ const postChatroom = data => {
   return post(CHATROOMS_URL, data);
 };
 
+const fetchAllUsers = () => {
+  return get(USERS_URL)
+}
+
+const postDM = data => {
+  const config = {
+    method: 'POST',
+    credentials: 'include',
+    headers: headers(),
+    body: JSON.stringify(data)
+  }
+  fetch(DM_URL, config)
+}
+
 export default {
   BASE_URL,
   BASE_WS_URL,
@@ -157,5 +185,8 @@ export default {
   logout,
   signup,
   deleteChatroom,
-  getUserChatrooms
+  getUserChatrooms,
+  fetchAllUsers,
+  postUserChatroom,
+  postDM
 };

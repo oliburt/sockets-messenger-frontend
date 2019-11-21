@@ -1,42 +1,26 @@
 import React, { Component } from "react";
-import BackendAdapter from "../adapters/BackendAdapter";
 import Cable from "../components/Cable";
 import SideBar from "./SideBar";
 import MessagingContainer from "./MessagingContainer";
 import NewChatroomForm from "../components/NewChatroomForm";
 import "../styles/Chat.css";
-import { connect } from 'react-redux'
-import { handleReceivedChatroom, handleReceivedMessage } from "../redux/actions/userChatroomActions";
-
+import { connect } from "react-redux";
+import {
+  handleReceivedChatroom,
+  handleReceivedMessage
+} from "../redux/actions/userChatroomActions";
+import { getAllChatrooms } from "../redux/actions/allChatroomsActions";
+import { getUsersChatrooms } from "../redux/actions/userChatroomActions";
+import FindChatrooms from "../components/FindChatrooms";
+import PresenceCable from "../components/PresenceCable";
+import FindUsers from "../components/FindUsers";
 
 export class ChatContainer extends Component {
-  state = {
-    mainDisplay: "None"
-  };
+  componentDidMount() {
+    this.props.getAllChatrooms();
+    this.props.getUsersChatrooms();
+  }
 
-  setMainDisplay = value => this.setState({ mainDisplay: value });
-
-
-
-  handleChannelClick = channel => {
-    this.setState({
-      selectedChannel: channel,
-      mainDisplay: "Chatroom"
-    });
-  };
-
-  // handleReceivedChatroom = response => {
-  //   if (response.deleted) {
-  //     const chatroomId = response.chatroom.chatroom.id;
-  //     // console.log(response)
-  //     this.setChatrooms(
-  //       this.state.chatrooms.filter(room => room.id !== chatroomId)
-  //     );
-  //   } else {
-  //     const { chatroom } = response;
-  //     this.setChatrooms([...this.state.chatrooms, chatroom]);
-  //   }
-  // };
 
   getChatroomNames = chatrooms =>
     chatrooms.map(room => ({ id: room.id, name: room.name }));
@@ -44,40 +28,23 @@ export class ChatContainer extends Component {
   getSelectedChannel = (chatrooms, selectedChannel) =>
     chatrooms.find(room => room.id === selectedChannel);
 
-  // handleReceivedMessage = response => {
-  //   const { message } = response;
-  //   const chatroomsCopy = [...this.state.chatrooms];
-  //   const chatroom = chatroomsCopy.find(
-  //     room => room.id === message.chatroom_id
-  //   );
-  //   chatroom.messages = [...chatroom.messages, message];
-  //   this.setChatrooms(chatroomsCopy);
-  // };
 
   renderMainContent = mainDisplay => {
-    const { chatrooms, selectedChannel } = this.state;
-
     if (mainDisplay === "None") return <div>Select a chatroom</div>;
-    if (mainDisplay === "Chatroom")
-      return (
-        <MessagingContainer
-          conversation={this.getSelectedChannel(chatrooms, selectedChannel)}
-          selectedChannel={this.getSelectedChannel(chatrooms, selectedChannel)}
-          user={this.props.user}
-        />
-      );
+    if (mainDisplay === "Chatroom") return <MessagingContainer />;
+    if (mainDisplay === "Explore") return <FindChatrooms />;
+    if (mainDisplay === "NewDM") return <FindUsers />;
     if (mainDisplay === "NewChatroom")
-      return <NewChatroomForm setMainDisplay={this.setMainDisplay} />;
+      return <NewChatroomForm />;
   };
 
   render() {
-    const { mainDisplay } = this.state;
-
     return (
       <div className="main-container">
+      <PresenceCable />
+
         <Cable
           channel={{ channel: "ChatroomsChannel" }}
-          url={BackendAdapter.BASE_WS_URL}
           onReceived={this.props.handleReceivedChatroom}
         />
         {this.props.userChatrooms.length
@@ -85,7 +52,6 @@ export class ChatContainer extends Component {
               <Cable
                 key={room.id}
                 channel={{ channel: "MessagesChannel", chatroom: room.id }}
-                url={BackendAdapter.BASE_WS_URL}
                 onReceived={this.props.handleReceivedMessage}
               />
             ))
@@ -93,11 +59,10 @@ export class ChatContainer extends Component {
 
         <SideBar
           handleChannelClick={this.handleChannelClick}
-          setMainDisplay={this.setMainDisplay}
-          mainDisplay={mainDisplay}
+          mainDisplay={this.props.mainDisplay}
         />
         <div id="main-content">
-          {this.renderMainContent(this.state.mainDisplay)}
+          {this.renderMainContent(this.props.mainDisplay)}
         </div>
       </div>
     );
@@ -105,12 +70,15 @@ export class ChatContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  userChatrooms: state.chatroomsStore.userChatrooms
-})
+  userChatrooms: state.chatroomsStore.userChatrooms,
+  mainDisplay: state.displayStore.mainDisplay
+});
 
 const mapDispatchToProps = dispatch => ({
-  handleReceivedChatroom: () => dispatch(handleReceivedChatroom()),
-  handleReceivedMessage: () => dispatch(handleReceivedMessage())
-})
+  handleReceivedChatroom: response => dispatch(handleReceivedChatroom(response)),
+  handleReceivedMessage: response => dispatch(handleReceivedMessage(response)),
+  getAllChatrooms: () => dispatch(getAllChatrooms()),
+  getUsersChatrooms: () => dispatch(getUsersChatrooms())
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

@@ -8,6 +8,17 @@ export const getAllChatrooms = () => dispatch => {
   );
 };
 
+export const getSelectedChatroom = chatroom => dispatch => {
+  dispatch({ type: ACTION_TYPES.LOADING_CHATROOMS });
+  BackendAdapter.get(`${BackendAdapter.CHATROOMS_URL}/${chatroom.id}`).then(
+    chatroom => {
+      if (chatroom && chatroom.id) {
+        dispatch({type: ACTION_TYPES.SELECT_CHATROOM, chatroom})
+      }
+    }
+  )
+}
+
 export const handleReceivedChatroom = response => dispatch => {
   if (response.deleted) {
     const chatroomId = response.chatroom.chatroom.id;

@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Header, Icon } from "semantic-ui-react";
-import BackendAdapter from "../adapters/BackendAdapter";
+import { Header, Icon } from "semantic-ui-react";
 import "../styles/Chat.css";
 import "../styles/ChatroomList.css";
 import { connect } from 'react-redux'
@@ -8,47 +7,36 @@ import actionTypes from "../redux/reducers/actionTypes";
 
 
 const ChatroomList = ({
-  handleClick,
   setMainDisplay,
   mainDisplay,
-  chatrooms,
-  selectedChatroom
+  usersChatrooms,
+  selectedChatroom,
+  setSelectedChatroom,
+  user
 }) => {
 
-  const handleDeleteButtonClick = (e, channel) => {
-    e.stopPropagation();
-    BackendAdapter.deleteChatroom(channel.id);
-  };
+  const handleClick = id => {
+    const chatroom = usersChatrooms.find(room => room.id === id)
+    setSelectedChatroom(chatroom)
+    setMainDisplay("Chatroom")
+  }
 
   return (
     <div>
-      <div
-        className={
-          mainDisplay === "NewChatroom" ? "add-chat active" : "add-chat"
-        }
-        onClick={() => setMainDisplay("NewChatroom")}
-      >
-        <p>+ New Chatroom</p>
-      </div>
+      
       <Header as="h4" className="chatrooms-title">
-        Chatrooms
+        My Chatrooms
       </Header>
 
       <div className="chatroom-list">
-        {chatrooms
-          ? chatrooms.map(room => (
+        {usersChatrooms
+          ? usersChatrooms.map(room => (
               <div
                 key={room.id}
                 onClick={e => handleClick(room.id)}
-                className={(selectedChatroom === room.id && mainDisplay === "Chatroom") ? "active" : null}
+                className={(selectedChatroom && selectedChatroom.id === room.id && mainDisplay === "Chatroom") ? "active" : null}
               >
                 <p><Icon name="chat"/>{room.name}</p>
-                {/* <Button
-                onClick={e => handleDeleteButtonClick(e, room)}
-                className="channel-del-btn"
-              >
-                -
-              </Button> */}
               </div>
             ))
           : null}
@@ -58,12 +46,13 @@ const ChatroomList = ({
 };
 
 const mapStateToProps = state => ({
-  chatrooms: state.chatroomsStore.chatrooms,
+  usersChatrooms: state.chatroomsStore.userChatrooms,
   selectedChatroom: state.chatroomsStore.selectedChatroom,
+  user: state.userStore.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: id => dispatch({type: actionTypes.SELECT_CHATROOM, selectedChatroomId: id})
+  setSelectedChatroom: chatroom => dispatch({type: actionTypes.SELECT_CHATROOM, chatroom}),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatroomList)

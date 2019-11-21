@@ -10,11 +10,11 @@ div.messaging-container {
   flex-direction: column;
 }
 
-div.messaging-container div:nth-child(1) {
+div.messaging-container > div:nth-child(1) {
   height: 90%;
 }
-div.messaging-container div:nth-child(2) {
-  height: 20%;
+div.messaging-container > div:nth-child(2) {
+  height: 10%;
 }
 
 
@@ -32,10 +32,69 @@ div.messageForm > form.ui.form > div.field {
   height: 100%;
 }
 
+div.messageForm > form.ui.form > div.field > input{
+  height: 100%;
+}
+
 div.sidebar {
   background-color: cornflowerblue;
 }
 
 div#main-content {
   background-color: #d9e7ff;
+}
+
+div.message {
+  text-align: left;
+  padding: 0.4rem 0.7rem;
+  border-bottom: 1px solid #d9e7ff;
+}
+
+div.message > span {
+  font-size: small;
+  color: rgb(167, 167, 167);
+}
+
+div.message > p {
+  margin: 0;
+}
+
+div.message:last-child {
+  border-bottom: none;
+}
+
+div.messages-container {
+  overflow-y: scroll;
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+div.messaging-container > div {
+  text-align: left;
+}
+div.messaging-container > div > h2 {
+  text-align: center;
+}
+
+#chatroom-description {
+  margin-left: 5rem;
+}
+#add-my-chat-btn {
+  float: right;
+  margin-right: 5rem;
+  font-size: small;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  background-color: #21ba45;
+  color: rgb(232, 230, 230);
+  cursor: pointer;
+  box-shadow: 0 0.2rem 0.5rem rgb(157, 187, 252);
+}
+
+#add-my-chat-btn:hover {
+  background-color: #56c771db;
+  box-shadow: 0 0.3rem 0.6rem rgb(157, 187, 252);
+
 }

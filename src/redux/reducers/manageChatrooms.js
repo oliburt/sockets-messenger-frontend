@@ -59,7 +59,7 @@ const chatroomReducer = (
     case ACTION_TYPES.SELECT_CHATROOM:
       return {
         ...state,
-        selectedChatroom: action.selectedChatroomId,
+        selectedChatroom: action.chatroom,
         loading: false
       };
 
@@ -109,6 +109,26 @@ const chatroomReducer = (
         }),
         loading: false
       };
+
+    case ACTION_TYPES.REMOVE_USER_CHATROOMS:
+      return {
+        ...state,
+        userChatrooms: [],
+        loading: false
+      };
+    case ACTION_TYPES.ADD_MESSAGE_TO_SELECTED_CHATROOM:
+      if (action.message.chatroom_id === state.selectedChatroom.id) {
+        return {
+          ...state,
+          selectedChatroom: {
+            ...state.selectedChatroom,
+            messages: [...state.selectedChatroom.messages, action.message]
+          },
+          loading: false
+        };
+      } else {
+        return state;
+      }
 
     default:
       return state;

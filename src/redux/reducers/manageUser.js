@@ -3,7 +3,8 @@ import ACTION_TYPES from "./actionTypes";
 const userReducer = (
   state = {
     user: null,
-    loading: false
+    loading: false,
+    allUsers: []
   },
   action
 ) => {
@@ -25,6 +26,12 @@ const userReducer = (
       return {
         ...state,
         user: null,
+        loading: false
+      };
+    case ACTION_TYPES.SET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.users,
         loading: false
       };
 

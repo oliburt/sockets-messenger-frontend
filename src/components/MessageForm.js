@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import { Form } from "semantic-ui-react";
 
-const MessageForm = ({ user, selectedChannel }) => {
+const MessageForm = ({ user, selectedChatroomId }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = () => {
     if (message.length < 1) return;
     const data = {
       user_id: user.id,
-      chatroom_id: selectedChannel.id,
+      chatroom_id: selectedChatroomId,
       content: message
     };
     setMessage("");
@@ -20,8 +20,8 @@ const MessageForm = ({ user, selectedChannel }) => {
     <div className="messageForm">
       <Form onSubmit={handleSubmit}>
         <Form.Field>
-          <textarea
-            placeholder="message"
+          <input
+            placeholder="Press enter to send message"
             value={message}
             onChange={e => setMessage(e.target.value)}
             className="message-input"

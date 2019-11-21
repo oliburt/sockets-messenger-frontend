@@ -4,21 +4,15 @@ import { Container, Message } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 import BackendAdapter from "./adapters/BackendAdapter";
 import { routes } from "./config/routes";
-import { connect } from 'react-redux'
-import { validateUser } from './redux/actions/userActions'
-import { getAllChatrooms } from './redux/actions/allChatroomsActions'
-import { getUsersChatrooms } from './redux/actions/userChatroomActions'
-
+import { connect } from "react-redux";
+import { validateUser, fetchAllUsers } from "./redux/actions/userActions";
 
 const notFoundMessage = () => <Message negative>NOT FOUND</Message>;
 
 class App extends Component {
-
-
   componentDidMount() {
-    this.props.validateUser()
-    this.props.getAllChatrooms()
-    this.props.getUsersChatrooms()
+    this.props.fetchAllUsers()
+    this.props.validateUser();
   }
 
   login = user => {
@@ -41,9 +35,7 @@ class App extends Component {
               exact
               component={routerProps =>
                 route.component ? (
-                  <route.component
-                    {...routerProps}
-                  />
+                  <route.component {...routerProps} />
                 ) : (
                   notFoundMessage()
                 )
@@ -56,11 +48,9 @@ class App extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch => ({
   validateUser: () => dispatch(validateUser()),
-  getAllChatrooms: () => dispatch(getAllChatrooms()),
-  getUsersChatrooms: () => dispatch(getUsersChatrooms()),
-})
+  fetchAllUsers: () => dispatch(fetchAllUsers())
+});
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App);

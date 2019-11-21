@@ -1,0 +1,15 @@
+div.message-area {
+    width: 90%;
+    background-color: white;
+    height: 80%;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    box-shadow: 0 20px 50px rgb(157, 187, 252);
+}
+
+#no-messages {
+    width: 60%;
+    margin: 5rem auto;
+    color: gray;
+    text-align: center;
+}
