@@ -31,6 +31,7 @@ export const signupUser = userDetails => dispatch => {
 export const logoutUser = () => dispatch => {
   dispatch({ type: ACTION_TYPES.LOADING_USER });
   BackendAdapter.logout().then(() => {
+    dispatch({type: ACTION_TYPES.REMOVE_SELECTED_CHATROOM})
     dispatch({ type: ACTION_TYPES.REMOVE_USER_CHATROOMS });
     dispatch({ type: ACTION_TYPES.REMOVE_USER });
   });
