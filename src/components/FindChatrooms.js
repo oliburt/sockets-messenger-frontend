@@ -18,7 +18,7 @@ class FindChatrooms extends Component {
   
   renderResults = () => {
     const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-    const rooms = this.props.publicChatrooms.filter(room => re.test(room.name))
+    const rooms = this.props.publicChatrooms ? this.props.publicChatrooms.filter(room => re.test(room.name)) : []
     return rooms.map(room => <SearchResult key={room.id} chatroom={room} />)
   }
 
