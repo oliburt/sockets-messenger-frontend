@@ -4,6 +4,7 @@ import { Header } from "semantic-ui-react";
 import { connect } from 'react-redux'
 import '../styles/FindChat.css'
 import UserSearchResult from "./UserSearchResult";
+import actionTypes from "../redux/reducers/actionTypes";
 
 
 class FindUsers extends Component {
@@ -19,29 +20,30 @@ class FindUsers extends Component {
   renderResults = () => {
     const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
     const users = this.props.allUsers.filter(room => re.test(room.username))
-    return users.filter(u => u.id !== this.props.currentUser.id).map(user => <UserSearchResult key={user.id} user={user} />)
+
+    return this.props.currentUser ? users.filter(u => u.id !== this.props.currentUser.id).map(user => <UserSearchResult key={user.id} user={user} />) : []
   }
 
   render() {
-    return (
-      <div className='explore-container'>
-        <Header as="h2">Search for User</Header>
-        <div className="ui icon input">
-          <input
-            type="text"
-            value={this.state.value}
-            tabIndex="0"
-            className="prompt"
-            autoComplete="off"
-            onChange={this.handleChange}
-          />
-          <i aria-hidden="true" className="search icon"></i>
+      return (
+        <div className='explore-container'>
+          <Header as="h2">Search for User</Header>
+          <div className="ui icon input">
+            <input
+              type="text"
+              value={this.state.value}
+              tabIndex="0"
+              className="prompt"
+              autoComplete="off"
+              onChange={this.handleChange}
+            />
+            <i aria-hidden="true" className="search icon"></i>
+          </div>
+          <div className="results">
+            {this.renderResults()}
+          </div>
         </div>
-        <div className="results">
-          {this.renderResults()}
-        </div>
-      </div>
-    );
+      );
   }
 }
 
@@ -50,6 +52,10 @@ const mapStateToProps = state => ({
   currentUser: state.userStore.user,
 });
 
+const mapDispatchToProps = dispatch => ({
+  setMainDispaly: payload => dispatch({type: actionTypes.SET_MAIN_DISPLAY, payload})
+})
 
 
-export default connect(mapStateToProps, null)(FindUsers);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FindUsers);
