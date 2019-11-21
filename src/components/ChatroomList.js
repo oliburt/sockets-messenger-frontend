@@ -22,7 +22,7 @@ const ChatroomList = ({
   const publicUserChatrooms = usersChatrooms.filter(room => room.public)
 
   return (
-    <div>
+    <div id="chatroom-list">
       
       <Header as="h4" className="chatrooms-title">
         My Chatrooms
