@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import "../styles/Admin.css";
 
-const DropBox = ({ currentUser, showDropdown, logout }) => {
+const DropBox = ({ currentUser, logout }) => {
     const history = useHistory()
 
     const loginClick = e => {
