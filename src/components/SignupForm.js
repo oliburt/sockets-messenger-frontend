@@ -50,6 +50,7 @@ class SignupForm extends React.Component {
       <Form
         onSubmit={this.submit}
         onChange={e => this.handleInputChange(e.target.name, e.target.value)}
+        id='signup-form'
       >
         {this.state.errors.length > 0 ? (
           <Message negative>
@@ -78,7 +79,7 @@ class SignupForm extends React.Component {
           value={this.state.password_confirmation}
         />
         <Form.Button>Submit</Form.Button>
-        <Link to="/login">Click here</Link> to log in!
+        <p className="link"><Link to="/login">Click here</Link> to log in!</p>
       </Form>
     );
   }

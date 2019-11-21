@@ -4,6 +4,7 @@ import { Form, Message } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import actionTypes from "../redux/reducers/actionTypes";
 import { connect } from "react-redux";
+import "../styles/Auth.css";
 
 export class LoginForm extends Component {
   state = {
@@ -45,6 +46,7 @@ export class LoginForm extends Component {
       <Form
         onSubmit={this.submit}
         onChange={e => this.handleInputChange(e.target.name, e.target.value)}
+        id='login-form'
       >
         {this.state.errors.length > 0 ? (
           <Message negative>
@@ -67,7 +69,7 @@ export class LoginForm extends Component {
           value={this.state.password}
         />
         <Form.Button>Submit</Form.Button>
-        <Link to="/signup">Click here</Link> to sign up!
+        <p className="link"><Link to="/signup">Click here</Link> to sign up!</p>
       </Form>
     );
   }
