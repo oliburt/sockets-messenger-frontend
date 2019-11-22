@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "../styles/Conversation.css";
-import { Icon } from "semantic-ui-react";
+import { Icon, Loader } from "semantic-ui-react";
 import {
   isUserActive,
   formatDateTime,
@@ -78,7 +78,7 @@ const Conversation = ({
     </div>
   ) : (
     <div className="empty-channel">
-      <span>No chatroom selected</span>
+      <Loader active inline="centered" />
     </div>
   );
 };
