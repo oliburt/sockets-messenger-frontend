@@ -104,3 +104,7 @@ div.messaging-container > div > h2 {
 #chatroom-list, #dm-list {
   margin-top: 2rem;
 }
+
+#none-selected {
+  margin-top: 20rem;
+}
