@@ -14,6 +14,7 @@ import { getUsersChatrooms } from "../redux/actions/userChatroomActions";
 import FindChatrooms from "../components/FindChatrooms";
 import PresenceCable from "../components/PresenceCable";
 import FindUsers from "../components/FindUsers";
+import { Icon } from "semantic-ui-react";
 
 export class ChatContainer extends Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ export class ChatContainer extends Component {
     chatrooms.find(room => room.id === selectedChannel);
 
   renderMainContent = mainDisplay => {
-    if (mainDisplay === "None") return <div>Select a chatroom</div>;
+    if (mainDisplay === "None") return <div id="none-selected"><Icon name='rocketchat' size='massive' color='grey'/></div>;
     if (mainDisplay === "Chatroom") return <MessagingContainer />;
     if (mainDisplay === "Explore") return <FindChatrooms />;
     if (mainDisplay === "NewDM") return <FindUsers />;
