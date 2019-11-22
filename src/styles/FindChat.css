@@ -6,7 +6,13 @@ div.results {
     background-color: rgb(240, 240, 240);
     box-shadow: 0 20px 50px rgb(157, 187, 252);
     border-radius: 2rem;
+    overflow: hidden;
+    overflow-y: scroll;
 }
+div.results::-webkit-scrollbar {
+    display: none;
+  }
+
 div.results > p:nth-child(2) {
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
