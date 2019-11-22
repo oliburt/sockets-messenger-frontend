@@ -8,6 +8,7 @@ div.results {
     border-radius: 2rem;
     overflow: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: none;
 }
 div.results::-webkit-scrollbar {
     display: none;
