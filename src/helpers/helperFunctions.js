@@ -15,7 +15,7 @@ export const getDMUser = (room, allUsers, currentUser) => {
   const users = room.users.map(userId =>
     allUsers.find(user => user.id === userId)
   );
-  return users.find(user => user.id !== currentUser.id);
+  return currentUser ? users.find(user => user.id !== currentUser.id) : {}
 };
 
 export const formatDateTime = datetime => {
