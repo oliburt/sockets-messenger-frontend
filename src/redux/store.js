@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import userStore from './reducers/manageUser'
 import chatroomsStore from './reducers/manageChatrooms'
 import displayStore from './reducers/manageDisplays'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 
 
 
