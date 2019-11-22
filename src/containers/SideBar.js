@@ -35,8 +35,12 @@ const SideBar = ({ user, setMainDisplay, logout, mainDisplay }) => {
           <p>+ New Direct Message</p>
         </div>
       ) : null}
-      <ChatroomList />
-      <DMList />
+      {user ? (
+        <>
+          <ChatroomList />
+          <DMList />
+        </>
+      ) : null}
     </div>
   );
 };

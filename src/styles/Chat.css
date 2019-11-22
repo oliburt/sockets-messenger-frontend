@@ -8,6 +8,8 @@ div.messaging-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.2rem;
 }
 
 div.messaging-container > div:nth-child(1) {
