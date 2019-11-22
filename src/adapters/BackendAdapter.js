@@ -1,6 +1,6 @@
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = "https://chat-sockets-application.herokuapp.com/api/v1";
 
-const BASE_WS_URL = "ws://localhost:3000/cable";
+const BASE_WS_URL = "wss://chat-sockets-application.herokuapp.com/cable";
 
 const CHATROOMS_URL = `${BASE_URL}/chatrooms`;
 const DM_URL = `${BASE_URL}/newdm`
