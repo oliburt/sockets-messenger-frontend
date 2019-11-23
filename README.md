@@ -24,7 +24,7 @@ Then you can fire up the development server by running:
 ```
 npm start
 ```
-*The frontend has been configured to to send requests to the live backend. In order to change the endpoint to something else look in /src/adapaters/BackendAdapter.js and change the base urls to your choosing.*
+*The frontend has been configured to send requests to the live backend. In order to change the endpoint to something else look in /src/adapaters/BackendAdapter.js and change the base urls to your choosing.*
 
 ## Main Features
 
