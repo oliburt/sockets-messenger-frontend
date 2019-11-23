@@ -13,7 +13,7 @@ In order to run this project on your own machine you will need first need Node.j
 You can download node [here](https://nodejs.org/en/).
 Npm should be installed with Node.
 
-You can then clone this directory onto your machine, open the root directory in your terminal and run
+You can then fork and clone this directory onto your machine, open the root directory in your terminal and run
 
 ```
 npm install
