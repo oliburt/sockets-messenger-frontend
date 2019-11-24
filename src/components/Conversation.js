@@ -68,7 +68,7 @@ const Conversation = ({
           <span id="chatroom-description">About: {chatroom.description}</span>
         </>
       ) : (
-        <h2> {getDMUser(chatroom, allUsers, currentUser).username}</h2>
+        chatroom && allUsers.length > 0 && currentUser && getDMUser(chatroom, allUsers, currentUser) ? <h2>{getDMUser(chatroom, allUsers, currentUser).username}</h2> : null
       )}
       <div className="message-area">
         <ScrollToBottom className="messages-container">

@@ -42,7 +42,7 @@ const DMList = ({
                     : null
                 }
               >
-                {getDMUser(room, allUsers, currentUser) ? (
+                {room && allUsers.length > 0 && currentUser && getDMUser(room, allUsers, currentUser) ? (
                   <p>
                     <Icon
                       name="user"
