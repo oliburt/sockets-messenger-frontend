@@ -11,7 +11,7 @@ export class Cable extends Component {
     const { channel, onReceived, onConnected } = this.props;
 
     const cable = ActionCable.createConsumer(BackendAdapter.BASE_WS_URL);
-    
+
     cable.subscriptions.create(channel, {
       received: onReceived,
       connected: onConnected
@@ -20,7 +20,7 @@ export class Cable extends Component {
   }
 
   componentWillUnmount() {
-    this.state.cable.subscriptions.remove(this.state.cable.subscriptions.subscriptions[0])
+    this.state.cable.subscriptions.subscriptions[0] && this.state.cable.subscriptions.remove(this.state.cable.subscriptions.subscriptions[0])
   }
   
 
