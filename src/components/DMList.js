@@ -31,7 +31,6 @@ const DMList = ({
       <div className="chatroom-list">
         {privateUserChatrooms && privateUserChatrooms.length > 0
           ? privateUserChatrooms.map(room => (
-              
               <div
                 key={room.id}
                 onClick={e => handleClick(room)}
@@ -44,14 +43,20 @@ const DMList = ({
                 }
               >
                 <p>
-                  <Icon
-                    name="user"
-                    color={
-                      isUserActive(allUsers, { user_id: getDMUser(room, allUsers, currentUser).id })
-                        ? "green"
-                        : "red"
-                    }
-                  />
+                  {getDMUser(room, allUsers, currentUser) ? (
+                    <Icon
+                      name="user"
+                      color={
+                        isUserActive(allUsers, {
+                          user_id: getDMUser(room, allUsers, currentUser).id
+                        })
+                          ? "green"
+                          : "red"
+                      }
+                    />
+                  ) : (
+                    <Icon name="user" />
+                  )}
                   {getDMUser(room, allUsers, currentUser).username}
                 </p>
               </div>
