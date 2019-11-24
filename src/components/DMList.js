@@ -42,8 +42,8 @@ const DMList = ({
                     : null
                 }
               >
-                <p>
-                  {getDMUser(room, allUsers, currentUser) ? (
+                {getDMUser(room, allUsers, currentUser) ? (
+                  <p>
                     <Icon
                       name="user"
                       color={
@@ -54,11 +54,9 @@ const DMList = ({
                           : "red"
                       }
                     />
-                  ) : (
-                    <Icon name="user" />
-                  )}
-                  {getDMUser(room, allUsers, currentUser).username}
-                </p>
+                    {getDMUser(room, allUsers, currentUser).username}
+                  </p>
+                ) : null}
               </div>
             ))
           : null}
