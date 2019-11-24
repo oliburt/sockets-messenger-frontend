@@ -29,7 +29,7 @@ export class ChatContainer extends Component {
     chatrooms.find(room => room.id === selectedChannel);
 
   renderMainContent = mainDisplay => {
-    if (mainDisplay === "None") return <div id="none-selected"><Icon name='rocketchat' size='massive' color='grey'/></div>;
+    if (mainDisplay === "None") return <div id="none-selected"><Icon name='chat' size='massive' color='grey'/></div>;
     if (mainDisplay === "Chatroom") return <MessagingContainer />;
     if (mainDisplay === "Explore") return <FindChatrooms />;
     if (mainDisplay === "NewDM") return <FindUsers />;
