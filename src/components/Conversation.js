@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "../styles/Conversation.css";
-import { Icon, Loader } from "semantic-ui-react";
+import { Icon, Loader, Message } from "semantic-ui-react";
 import {
   isUserActive,
   formatDateTime,
@@ -53,6 +53,7 @@ const Conversation = ({
 
   return chatroom ? (
     <div>
+      {!currentUser ? <Message>Please login to be able to send messages</Message> : null}
       {chatroom.public ? (
         <>
           <h2>{chatroom.name}</h2>
