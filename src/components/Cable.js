@@ -20,7 +20,7 @@ export class Cable extends Component {
   }
 
   componentWillUnmount() {
-    this.state.cable.subscriptions.subscriptions[0] && this.state.cable.subscriptions.remove(this.state.cable.subscriptions.subscriptions[0])
+    this.state.cable && this.state.cable.subscriptions.subscriptions[0] && this.state.cable.subscriptions.remove(this.state.cable.subscriptions.subscriptions[0])
   }
   
 
