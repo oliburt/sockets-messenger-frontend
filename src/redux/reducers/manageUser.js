@@ -35,6 +35,13 @@ const userReducer = (
         loading: false
       };
 
+    case ACTION_TYPES.ADD_USER_TO_ALL_USERS:
+      return {
+        ...state,
+        allUsers: [...state.allUsers, action.user],
+        loading: false
+      };
+
     default:
       return state;
   }

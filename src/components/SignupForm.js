@@ -3,7 +3,8 @@ import { Form, Message } from "semantic-ui-react";
 import BackendAdapter from "../adapters/BackendAdapter";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
-import actionTypes from "../redux/reducers/actionTypes";
+import { signupUser } from "../redux/actions/userActions";
+
 
 
 class SignupForm extends React.Component {
@@ -36,7 +37,7 @@ class SignupForm extends React.Component {
       } else if (user && user.errors) {
         this.setErrors(user.errors);
       } else if (user && user.id) {
-        this.props.login(user);
+        this.props.signup(user);
         this.props.history.push('/')
       } else {
         this.setErrors(["Something Went Wrong!"]);
@@ -86,7 +87,7 @@ class SignupForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: user => dispatch({type: actionTypes.ADD_USER, user})
+  signup: user => dispatch(signupUser(user))
 })
 
 

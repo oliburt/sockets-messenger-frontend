@@ -19,19 +19,18 @@ export const loginUser = userDetails => dispatch => {
   });
 };
 
-export const signupUser = userDetails => dispatch => {
+export const signupUser = user => dispatch => {
   dispatch({ type: ACTION_TYPES.LOADING_USER });
-  BackendAdapter.signup(userDetails).then(user => {
     if (user && user.id) {
       dispatch({ type: ACTION_TYPES.ADD_USER, user });
+      dispatch({ type: ACTION_TYPES.ADD_USER_TO_ALL_USERS, user });
     }
-  });
 };
 
 export const logoutUser = () => dispatch => {
   dispatch({ type: ACTION_TYPES.LOADING_USER });
   BackendAdapter.logout().then(() => {
-    dispatch({type: ACTION_TYPES.REMOVE_SELECTED_CHATROOM})
+    dispatch({ type: ACTION_TYPES.REMOVE_SELECTED_CHATROOM });
     dispatch({ type: ACTION_TYPES.REMOVE_USER_CHATROOMS });
     dispatch({ type: ACTION_TYPES.REMOVE_USER });
   });
@@ -40,6 +39,6 @@ export const logoutUser = () => dispatch => {
 export const fetchAllUsers = () => dispatch => {
   dispatch({ type: ACTION_TYPES.LOADING_USER });
   BackendAdapter.fetchAllUsers().then(users => {
-    dispatch({ type: ACTION_TYPES.SET_ALL_USERS, users})
+    dispatch({ type: ACTION_TYPES.SET_ALL_USERS, users });
   });
-}
+};
