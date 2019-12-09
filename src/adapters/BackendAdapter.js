@@ -74,6 +74,7 @@ const login = userDetails =>
 const signup = userDetails =>
   fetch(SIGNUP_URL, {
     method: "POST",
+    credentials: 'include',
     headers: headers(),
     body: JSON.stringify({ user: userDetails })
   })
